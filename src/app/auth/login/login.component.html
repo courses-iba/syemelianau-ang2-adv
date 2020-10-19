@@ -1,5 +1,6 @@
 <p class="text-center">Войдите для работы</p>
-<form [formGroup]="loginForm">
+<div *ngIf="loginMessage && loginMessage.text" class="alert alert-{{loginMessage.type}}">{{loginMessage.text}}</div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="email">Email</label>
     <input
@@ -10,9 +11,11 @@
       formControlName="email"
       [ngClass]="loginForm.controls.email.invalid && loginForm.controls.email.touched ? 'is-invalid' : ''"
     >
-    <div *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched" class="invalid-feedback">
-      {{emailErrorMessages()}}
-    </div>
+    <div *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched" class="invalid-feedback">{{
+      this.loginForm.controls.email.hasError('email')
+        ? 'Введите корректный email.' : this.loginForm.controls.email.hasError('required')
+        ? 'Email не может быть пустым.' : ''
+      }}</div>
   </div>
   <div class="form-group">
     <label for="password">Пароль</label>
@@ -24,9 +27,11 @@
       formControlName="password"
       [ngClass]="loginForm.controls.password.invalid && loginForm.controls.password.touched ? 'is-invalid' : ''"
     >
-    <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" class="invalid-feedback">
-      {{passwordErrorMessages()}}
-    </div>
+    <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" class="invalid-feedback">{{
+      this.loginForm.controls.password.hasError('minlength')
+        ? 'Пароль должен быть больше 6 символов. Сейчас ' + this.loginForm.controls.password.value.length + '.'
+        : this.loginForm.controls.password.hasError('required') ? 'Пароль не может быть пустым.' : ''
+      }}</div>
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-block btn-primary" [disabled]="!loginForm.valid">Войти</button>
