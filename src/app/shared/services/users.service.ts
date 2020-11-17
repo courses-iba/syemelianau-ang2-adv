@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import { User } from '../models/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUserByEmail(email: string, password: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUri}?email=${email}&password=${password}`);
+    return this.http.get<User>(`${this.apiUri}?email=${email}&password=${password}`).pipe(map(res => res[0]));
   }
 
 }

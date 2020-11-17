@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 
-import { UsersService } from '../../shared/services/users.service';
-import { User } from '../../shared/models/user.model';
+import { AuthService } from '../../shared/services/auth.service';
 import { Message } from '../../shared/models/message.model';
 
 @Component({
@@ -20,21 +17,15 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private usersService: UsersService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    let message;
-    this.usersService.getUserByEmail(
+    this.authService.login(
       this.loginForm.controls.email.value,
-      this.loginForm.controls.password.value
-    ).pipe(catchError(() => {
-      message = 'Извините, что-то пошло не так, попробуйте еще раз';
-      return of([]);
-    })).subscribe((users: Array<User>) => {
-      message = users.length === 0 ? 'Такого пользователя не существует' : '';
-      this.loginMessage = new Message(message, 'danger');
-    });
+      this.loginForm.controls.password.value,
+      (message: string) => this.loginMessage = new Message(message, 'danger')
+    );
   }
 }
