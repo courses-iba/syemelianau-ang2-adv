@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { AsyncValidatorFn } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+import { AsyncEmailValidator } from '../validators/async-email.validator';
 import { User } from '../models/user.model';
 import { UsersService } from './users.service';
 
@@ -46,5 +48,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('user');
+  }
+
+  isEmailTaken(): AsyncValidatorFn {
+    return AsyncEmailValidator(this.usersService);
   }
 }

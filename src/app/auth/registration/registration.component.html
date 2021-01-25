@@ -18,7 +18,8 @@
     >{{
       this.registrationForm.controls.email.hasError('email')
         ? 'Введите корректный email.' : this.registrationForm.controls.email.hasError('required')
-        ? 'Email не может быть пустым.' : ''
+        ? 'Email не может быть пустым.' : this.registrationForm.controls.email.hasError('taken')
+          ? 'Email уже занят.' : ''
       }}</div>
   </div>
   <div class="form-group">

@@ -11,7 +11,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email], this.authService.isEmailTaken()),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     name: new FormControl('', [Validators.required]),
     agree: new FormControl('', [Validators.required, Validators.requiredTrue])
