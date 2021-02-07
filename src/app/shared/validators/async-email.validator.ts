@@ -6,9 +6,9 @@ import { UsersService } from '../services/users.service';
 import { User } from '../models/user.model';
 
 export function AsyncEmailValidator(usersService: UsersService): AsyncValidatorFn {
-  return (control: AbstractControl): Observable<ValidationErrors> => {
-    return usersService.getUserByEmail(control.value).pipe(map((user: User) => {
-      return user ? { taken: true } : null;
-    }));
-  };
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+        return usersService.getUserByEmail(control.value).pipe(map((user: User) => {
+            return user ? { taken: true } : null;
+        }));
+    };
 }

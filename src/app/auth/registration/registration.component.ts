@@ -5,29 +5,30 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+    selector: 'app-registration',
+    templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email], this.authService.isEmailTaken()),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    name: new FormControl('', [Validators.required]),
-    agree: new FormControl('', [Validators.required, Validators.requiredTrue])
-  });
+    registrationForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) {
+        this.registrationForm = new FormGroup({
+            email: new FormControl('', [Validators.required, Validators.email], this.authService.isEmailTaken()),
+            password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+            name: new FormControl('', [Validators.required]),
+            agree: new FormControl('', [Validators.required, Validators.requiredTrue])
+        });
+    }
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  onSubmit(): void {
-    this.authService.registration(
-      this.registrationForm.controls.email.value,
-      this.registrationForm.controls.password.value,
-      this.registrationForm.controls.name.value,
-      (message, ok) =>
-        this.router.navigate(['/login'], { queryParams: { message, canLogin: ok } })
-    );
-  }
+    onSubmit(): void {
+        this.authService.registration(
+            this.registrationForm.controls.email.value,
+            this.registrationForm.controls.password.value,
+            this.registrationForm.controls.name.value,
+            (message, ok) =>
+                this.router.navigate(['/login'], { queryParams: { message, canLogin: ok } })
+        );
+    }
 }

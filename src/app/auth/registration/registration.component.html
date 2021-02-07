@@ -1,88 +1,80 @@
 <p class="text-center">Регистрация для получения доступа</p>
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input
-      type="text"
-      class="form-control"
-      id="email"
-      placeholder="Введите email"
-      formControlName="email"
-      [ngClass]=
-        "registrationForm.controls.email.invalid
-        && registrationForm.controls.email.touched ? 'is-invalid' : ''"
-    >
-    <div
-      *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.touched"
-      class="invalid-feedback"
-    >{{
-      this.registrationForm.controls.email.hasError('email')
-        ? 'Введите корректный email.' : this.registrationForm.controls.email.hasError('required')
-        ? 'Email не может быть пустым.' : this.registrationForm.controls.email.hasError('taken')
-          ? 'Email уже занят.' : ''
-      }}</div>
-  </div>
-  <div class="form-group">
-    <label for="password">Пароль</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      placeholder="Введите пароль"
-      formControlName="password"
-      [ngClass]=
-        "registrationForm.controls.password.invalid
-        && registrationForm.controls.password.touched ? 'is-invalid' : ''"
-    >
-    <div
-      *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.touched"
-      class="invalid-feedback"
-    >{{
-      this.registrationForm.controls.password.hasError('minlength')
-        ? 'Пароль должен быть больше 6 символов. Сейчас ' + this.registrationForm.controls.password.value.length + '.'
-        : this.registrationForm.controls.password.hasError('required') ? 'Пароль не может быть пустым.' : ''
-      }}</div>
-  </div>
-  <div class="form-group">
-    <label for="name">Имя</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      placeholder="Введите имя"
-      formControlName="name"
-      [ngClass]=
-        "registrationForm.controls.name.invalid
-        && registrationForm.controls.name.touched ? 'is-invalid' : ''"
-    >
-    <div
-      *ngIf="registrationForm.controls.name.invalid && registrationForm.controls.name.touched"
-      class="invalid-feedback"
-    >{{this.registrationForm.controls.name.hasError('required') ? 'Имя не может быть пустым.' : ''}}</div>
-  </div>
-  <div class="form-group">
-    <label for="agree">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="agree"
-        formControlName="agree"
-        [ngClass]=
-          "registrationForm.controls.agree.invalid
-          && registrationForm.controls.agree.touched ? 'is-invalid' : ''"
-      >
-      <span>&emsp;Согласен с правилами</span>
-    </label>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-block btn-primary" [disabled]="!registrationForm.valid">
-      Зарегистрироваться
-    </button>
-  </div>
-  <div class="form-group">
-    <p class="text-muted text-center">
-      Уже есть аккаунт?
-      <a routerLink="/login">Войти!</a>
-    </p>
-  </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input
+                type="text"
+                class="form-control"
+                id="email"
+                placeholder="Введите email"
+                formControlName="email"
+                [ngClass]="registrationForm.controls.email.invalid
+                && registrationForm.controls.email.touched ? 'is-invalid' : ''"
+        >
+        <div *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.touched"
+             class="invalid-feedback">
+            {{this.registrationForm.controls.email.hasError('email')
+            ? 'Введите корректный email.' : this.registrationForm.controls.email.hasError('required')
+                ? 'Email не может быть пустым.' : this.registrationForm.controls.email.hasError('taken')
+                    ? 'Email уже занят.' : ''}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Пароль</label>
+        <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Введите пароль"
+                formControlName="password"
+                [ngClass]="registrationForm.controls.password.invalid
+                && registrationForm.controls.password.touched ? 'is-invalid' : ''"
+        >
+        <div *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.touched"
+             class="invalid-feedback">
+            {{this.registrationForm.controls.password.hasError('minlength')
+            ? 'Пароль должен быть больше 6 символов. Сейчас ' + this.registrationForm.controls.password.value.length + '.'
+            : this.registrationForm.controls.password.hasError('required') ? 'Пароль не может быть пустым.' : ''}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">Имя</label>
+        <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Введите имя"
+                formControlName="name"
+                [ngClass]="registrationForm.controls.name.invalid
+                && registrationForm.controls.name.touched ? 'is-invalid' : ''"
+        >
+        <div *ngIf="registrationForm.controls.name.invalid && registrationForm.controls.name.touched"
+             class="invalid-feedback">
+            {{this.registrationForm.controls.name.hasError('required') ? 'Имя не может быть пустым.' : ''}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="agree">
+            <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="agree"
+                    formControlName="agree"
+                    [ngClass]="registrationForm.controls.agree.invalid
+                    && registrationForm.controls.agree.touched ? 'is-invalid' : ''"
+            >
+            <span>&emsp;Согласен с правилами</span>
+        </label>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="!registrationForm.valid">
+            Зарегистрироваться
+        </button>
+    </div>
+    <div class="form-group">
+        <p class="text-muted text-center">
+            Уже есть аккаунт?
+            <a routerLink="/login">Войти!</a>
+        </p>
+    </div>
 </form>

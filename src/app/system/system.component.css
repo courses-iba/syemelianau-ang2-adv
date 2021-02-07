@@ -1,0 +1,27 @@
+.main-wrapper {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    padding-left: 230px;
+    min-height: 100vh;
+    margin: 0 auto;
+    left: 0;
+    background-color: #f0f3f6;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    -webkit-transition: left .3s ease, padding-left .3s ease;
+    transition: left .3s ease, padding-left .3s ease;
+    overflow: hidden;
+}
+
+.app .content {
+    padding: 110px 30px 90px 30px;
+    min-height: 100vh
+}
