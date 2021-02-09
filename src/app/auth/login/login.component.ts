@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/system']);
+            this.router.navigate(['/system']).then();
         }
         this.route.queryParamMap.subscribe(params =>
             this.loginMessage = params.get('canLogin')
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             this.loginForm.controls.password.value,
             (message: string) => message
                 ? this.loginMessage = new Message(message, 'danger')
-                : this.router.navigate(['/system'])
+                : this.router.navigate(['/system']).then()
         );
     }
 }

@@ -26,7 +26,7 @@ export class AuthService {
             .pipe(this.error)
             .subscribe((user: User) => {
                 user && user.password === password
-                    ? localStorage.setItem('user', JSON.stringify(user))
+                    ? sessionStorage.setItem('user', JSON.stringify(user))
                     : this.message = 'Такого пользователя не существует';
                 callback(this.message);
             });
@@ -43,11 +43,11 @@ export class AuthService {
     }
 
     logout(): void {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
     }
 
     isLoggedIn(): boolean {
-        return !!localStorage.getItem('user');
+        return !!sessionStorage.getItem('user');
     }
 
     isEmailTaken(): AsyncValidatorFn {

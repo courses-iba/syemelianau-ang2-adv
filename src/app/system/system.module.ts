@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { SystemComponent } from './system.component';
 import { SystemRoutingModule } from './system-routing.module';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @NgModule({
-    declarations: [SystemComponent],
+    declarations: [
+        SystemComponent,
+        SidebarComponent
+    ],
     exports: [SystemComponent],
     imports: [
         CommonModule,
