@@ -1,0 +1,15 @@
+<header class="header">
+    <div class="header-block header-block-search">{{date.toLocaleDateString()}}</div>
+    <div class="header-block header-block-nav">
+        <ul class="nav-profile">
+            <li class="profile dropdown" appProfileDropdown>
+                <a class="nav-link dropdown-toggle" role="button">
+                    <span class="name">Здравствуйте, {{user.name}}</span>
+                </a>
+                <div class="dropdown-menu profile-dropdown-menu">
+                    <a class="dropdown-item" (click)="logout()">Выйти</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>

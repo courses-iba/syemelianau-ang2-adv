@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-    title: string;
 
-    constructor() {
-        this.title = 'syemelianau-ang2-adv';
-    }
+    constructor() {}
 
     ngOnInit(): void {}
 

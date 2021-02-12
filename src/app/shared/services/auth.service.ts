@@ -11,9 +11,11 @@ import { UsersService } from './users.service';
     providedIn: 'root'
 })
 export class AuthService {
-    private message = '';
+    private message: string;
 
-    constructor(private usersService: UsersService) {}
+    constructor(private usersService: UsersService) {
+        this.message = '';
+    }
 
     private error = catchError(() => {
         this.message = 'Извините, что-то пошло не так, попробуйте еще раз';
@@ -52,5 +54,9 @@ export class AuthService {
 
     isEmailTaken(): AsyncValidatorFn {
         return AsyncEmailValidator(this.usersService);
+    }
+
+    getLoggedUser(): User {
+        return JSON.parse(sessionStorage.getItem('user')) as User;
     }
 }
