@@ -20,7 +20,8 @@ export class UsersService {
     }
 
     registration(email: string, password: string, name: string): Observable<User> {
-        return this.http.post<User>(this.apiUri, new User(email, password, name));
+        const user: User = { email, password, name };
+        return this.http.post<User>(this.apiUri, user);
     }
 
     getUserByEmail(email: string): Observable<User> {

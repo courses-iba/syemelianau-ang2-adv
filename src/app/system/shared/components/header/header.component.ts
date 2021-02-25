@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
 
     constructor(private authService: AuthService, private router: Router) {
         this.date = new Date();
-        this.user = new User('', '', '');
     }
 
     ngOnInit(): void {
