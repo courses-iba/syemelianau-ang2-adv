@@ -36,6 +36,7 @@ ul, menu, dir {
 
 li {
     display: list-item;
+    cursor: pointer;
 }
 
 .sidebar .nav > li > a {

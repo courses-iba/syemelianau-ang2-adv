@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { StudentService } from '../shared/services/student.service';
-import { StatusService } from '../shared/services/status.service';
-import { TaskService } from '../shared/services/task.service';
+import { StudentsService } from '../shared/services/students.service';
 import { ListElement } from '../shared/models/list-element.model';
-import { Student } from '../shared/models/sudent.model';
 import { StudentView } from '../shared/models/student-view.model';
+import { Student } from '../shared/models/sudent.model';
+import { Filter } from '../shared/models/filter.model';
 
 @Component({
     selector: 'app-students-page',
@@ -23,17 +22,23 @@ export class StudentsPageComponent implements OnInit {
     statusListLoaded: boolean;
     taskListLoaded: boolean;
     studentsProcessed: boolean;
+    filter: Filter;
     error: any;
 
-    constructor(
-        private studentService: StudentService,
-        private statusService: StatusService,
-        private taskService: TaskService
-    ) {
+    constructor(private studentsService: StudentsService) {
         this.studentsLoaded = false;
         this.statusListLoaded = false;
         this.taskListLoaded = false;
         this.studentsProcessed = false;
+        this.filter = {
+            field: 'name',
+            value: '',
+            params: [
+                { field: 'name', name: 'Имя' },
+                { field: 'status', name: 'Статус' },
+                { field: 'task', name: 'Таск' }
+            ]
+        };
     }
 
     ngOnInit(): void {
@@ -43,7 +48,7 @@ export class StudentsPageComponent implements OnInit {
     }
 
     getStudents(): void {
-        this.studentService.getStudents()
+        this.studentsService.getStudents()
             .pipe(catchError(error => {
                 this.error = error;
                 return of();
@@ -57,7 +62,7 @@ export class StudentsPageComponent implements OnInit {
     }
 
     getStatusList(): void {
-        this.statusService.getStatusList()
+        this.studentsService.getStatusList()
             .pipe(catchError(error => {
                 this.error = error;
                 return of();
@@ -71,7 +76,7 @@ export class StudentsPageComponent implements OnInit {
     }
 
     getTaskList(): void {
-        this.taskService.getTaskList()
+        this.studentsService.getTaskList()
             .pipe(catchError(error => {
                 this.error = error;
                 return of();

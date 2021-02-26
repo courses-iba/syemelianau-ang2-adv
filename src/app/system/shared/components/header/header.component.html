@@ -1,8 +1,8 @@
 <header class="header">
-    <div class="header-block header-block-search">{{date.toLocaleDateString()}}</div>
+    <div class="header-block header-block-search">{{date | date}}</div>
     <div class="header-block header-block-nav">
         <ul class="nav-profile">
-            <li class="profile dropdown" appProfileDropdown>
+            <li class="profile dropdown" appDropdown>
                 <a class="nav-link dropdown-toggle" role="button">
                     <span class="name">Здравствуйте, {{user.name}}</span>
                 </a>

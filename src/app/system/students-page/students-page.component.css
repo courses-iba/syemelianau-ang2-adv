@@ -25,3 +25,7 @@
     align-items: center;
     height: calc(100vh - 200px);
 }
+
+.dropdown-item {
+    cursor: pointer;
+}
