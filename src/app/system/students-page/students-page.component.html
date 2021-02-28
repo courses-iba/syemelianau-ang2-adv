@@ -44,6 +44,19 @@
                                     <td>{{student.name}}</td>
                                     <td>{{student.status}}</td>
                                     <td>{{student.task}}</td>
+                                    <td class="btn-toolbar">
+                                        <button type="button"
+                                                class="btn btn-primary"
+                                                routerLink="../student"
+                                                [queryParams]="{ id: student.id }">
+                                            Edit
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-danger text-dark"
+                                                (click)="deleteStudent(student.id)">
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -54,7 +67,7 @@
             <ng-template #loading>
                 <div class="loading">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
+                        <span class="sr-only">Загрузка...</span>
                     </div>
                 </div>
             </ng-template>
