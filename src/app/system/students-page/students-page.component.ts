@@ -21,15 +21,13 @@ export class StudentsPageComponent implements OnInit {
     studentsLoaded: boolean;
     statusListLoaded: boolean;
     taskListLoaded: boolean;
-    studentsProcessed: boolean;
+    dataProcessed: boolean;
     filter: Filter;
+    reqError: any;
     error: any;
 
     constructor(private studentsService: StudentsService) {
-        this.studentsLoaded = false;
-        this.statusListLoaded = false;
-        this.taskListLoaded = false;
-        this.studentsProcessed = false;
+        this.setLoaded(false);
         this.filter = {
             field: 'name',
             value: '',
@@ -91,15 +89,36 @@ export class StudentsPageComponent implements OnInit {
 
     loaded(): boolean {
         const dataLoaded = this.studentsLoaded && this.statusListLoaded && this.taskListLoaded;
-        if (dataLoaded && !this.studentsProcessed) {
+        if (dataLoaded && !this.dataProcessed) {
             this.displayStudents = this.students.map((student: Student) => ({
                 id: student.id,
                 name: student.name,
                 status: this.statusList.find(({ id }) => id === student.statusId).name,
                 task: this.taskList.find(({ id }) => id === student.taskId).name
             }));
-            this.studentsProcessed = true;
+            this.dataProcessed = true;
         }
         return dataLoaded;
+    }
+
+    deleteStudent(id: number): void {
+        this.studentsService.deleteStudent(id)
+            .pipe(catchError(error => {
+                this.reqError = error;
+                return of();
+            }))
+            .subscribe(() => {
+                if (!this.reqError) {
+                    this.setLoaded(false);
+                    this.ngOnInit();
+                }
+            });
+    }
+
+    setLoaded(loaded: boolean): void {
+        this.studentsLoaded = loaded;
+        this.statusListLoaded = loaded;
+        this.taskListLoaded = loaded;
+        this.dataProcessed = loaded;
     }
 }

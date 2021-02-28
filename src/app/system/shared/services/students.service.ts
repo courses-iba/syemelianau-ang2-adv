@@ -19,6 +19,22 @@ export class StudentsService {
         return this.http.get<Array<Student>>(`${this.apiUri}/student`);
     }
 
+    getStudent(id: number): Observable<Student> {
+        return this.http.get<Student>(`${this.apiUri}/student/${id}`);
+    }
+
+    createStudent(student: Student): Observable<Student> {
+        return this.http.post<Student>(`${this.apiUri}/student`, student);
+    }
+
+    updateStudent(id: number, studentData: Student): Observable<Student> {
+        return this.http.put<Student>(`${this.apiUri}/student/${id}`, studentData);
+    }
+
+    deleteStudent(id: number): Observable<Student> {
+        return this.http.delete<Student>(`${this.apiUri}/student/${id}`);
+    }
+
     getStatusList(): Observable<Array<ListElement>> {
         return this.http.get<Array<ListElement>>(`${this.apiUri}/statuslist`);
     }
