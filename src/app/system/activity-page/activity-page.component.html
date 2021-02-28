@@ -1,0 +1,34 @@
+<div *ngIf="loaded(); else loading">
+    <div class="container">
+        <h1 class="modal-header">Текущая активность</h1>
+        <div class="modal-body">
+            <div *ngIf="error; else content" class="alert alert-danger">Извините, что-то пошло не так...</div>
+            <ng-template #content>
+                <div class="card card-body">
+                    <div *ngFor="let activity of activities" class="flex-row">
+                        <div class="progress">
+                            <div class="progress-bar bg-{{activity.type}}"
+                                 role="progressbar"
+                                 [style]="'width: ' + activity.percent + '%'"
+                                 aria-valuenow="{{activity.task}}"
+                                 aria-valuemin="{{activity.min}}"
+                                 aria-valuemax="{{activity.max}}"
+                            >{{activity.name}}</div>
+                        </div>
+                        <div>
+                            <span class="text-{{activity.type}}">{{activity.task}}</span> из
+                            <span class="text-primary">{{activity.max}}</span> заданий
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<ng-template #loading>
+    <div class="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Загрузка...</span>
+        </div>
+    </div>
+</ng-template>

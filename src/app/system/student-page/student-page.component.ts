@@ -4,7 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { StudentsService } from '../shared/services/students.service';
-import { Student } from '../shared/models/sudent.model';
+import { ListService } from '../shared/services/list.service';
+import { Student } from '../shared/models/student.model';
 import { ListElement } from '../shared/models/list-element.model';
 
 @Component({
@@ -24,6 +25,7 @@ export class StudentPageComponent implements OnInit {
 
     constructor(
         private studentsService: StudentsService,
+        private listService: ListService,
         private route: ActivatedRoute,
         private router: Router
     ) {
@@ -49,44 +51,34 @@ export class StudentPageComponent implements OnInit {
         this.getTaskList();
     }
 
+    createError = error => {
+        this.error = error;
+        return of();
+    };
+
     getStudent(id: number): void {
         this.studentsService.getStudent(id)
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+            .pipe(catchError(this.createError))
             .subscribe((student: Student) => {
-                if (!this.error) {
-                    this.student = student;
-                }
+                this.student = student;
                 this.studentLoaded = true;
             });
     }
 
     getStatusList(): void {
-        this.studentsService.getStatusList()
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+        this.listService.getStatusList()
+            .pipe(catchError(this.createError))
             .subscribe((statusList: Array<ListElement>) => {
-                if (!this.error) {
-                    this.statusList = statusList;
-                }
+                this.statusList = statusList;
                 this.statusListLoaded = true;
             });
     }
 
     getTaskList(): void {
-        this.studentsService.getTaskList()
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+        this.listService.getTaskList()
+            .pipe(catchError(this.createError))
             .subscribe((taskList: Array<ListElement>) => {
-                if (!this.error) {
-                    this.taskList = taskList;
-                }
+                this.taskList = taskList;
                 this.taskListLoaded = true;
             });
     }
@@ -103,33 +95,19 @@ export class StudentPageComponent implements OnInit {
             }
             this.dataProcessed = true;
         }
-        return dataLoaded;
+        return dataLoaded || !!this.error;
     }
 
     createStudent(): void {
         this.studentsService.createStudent(this.student)
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
-            .subscribe(() => {
-                if (!this.error) {
-                    this.router.navigate(['/system/students']).then();
-                }
-            });
+            .pipe(catchError(this.createError))
+            .subscribe(() => this.router.navigate(['/system/students']).then());
     }
 
     updateStudent(): void {
         this.studentsService.updateStudent(this.student.id, this.student)
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
-            .subscribe(() => {
-                if (!this.error) {
-                    this.router.navigate(['/system/students']).then();
-                }
-            });
+            .pipe(catchError(this.createError))
+            .subscribe(() => this.router.navigate(['/system/students']).then());
     }
 
     onSubmit(): void {
