@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { StudentsService } from '../shared/services/students.service';
+import { ListService } from '../shared/services/list.service';
 import { ListElement } from '../shared/models/list-element.model';
 import { StudentView } from '../shared/models/student-view.model';
 import { Student } from '../shared/models/sudent.model';
@@ -14,20 +15,17 @@ import { Filter } from '../shared/models/filter.model';
     styleUrls: ['./students-page.component.css']
 })
 export class StudentsPageComponent implements OnInit {
-    students: Array<Student>;
-    statusList: Array<ListElement>;
-    taskList: Array<ListElement>;
+    students?: Array<Student>;
+    statusList?: Array<ListElement>;
+    taskList?: Array<ListElement>;
     displayStudents: Array<StudentView>;
-    studentsLoaded: boolean;
-    statusListLoaded: boolean;
-    taskListLoaded: boolean;
     dataProcessed: boolean;
     filter: Filter;
-    reqError: any;
+    deleteError: any;
     error: any;
 
-    constructor(private studentsService: StudentsService) {
-        this.setLoaded(false);
+    constructor(private studentsService: StudentsService, private listService: ListService) {
+        this.setNotLoaded();
         this.filter = {
             field: 'name',
             value: '',
@@ -45,50 +43,37 @@ export class StudentsPageComponent implements OnInit {
         this.getTaskList();
     }
 
+    createError = error => {
+        this.error = error;
+        return of();
+    };
+
     getStudents(): void {
         this.studentsService.getStudents()
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+            .pipe(catchError(this.createError))
             .subscribe((students: Array<Student>) => {
-                if (!this.error) {
-                    this.students = students;
-                }
-                this.studentsLoaded = true;
+                this.students = students;
             });
     }
 
     getStatusList(): void {
-        this.studentsService.getStatusList()
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+        this.listService.getStatusList()
+            .pipe(catchError(this.createError))
             .subscribe((statusList: Array<ListElement>) => {
-                if (!this.error) {
-                    this.statusList = statusList;
-                }
-                this.statusListLoaded = true;
+                this.statusList = statusList;
             });
     }
 
     getTaskList(): void {
-        this.studentsService.getTaskList()
-            .pipe(catchError(error => {
-                this.error = error;
-                return of();
-            }))
+        this.listService.getTaskList()
+            .pipe(catchError(this.createError))
             .subscribe((taskList: Array<ListElement>) => {
-                if (!this.error) {
-                    this.taskList = taskList;
-                }
-                this.taskListLoaded = true;
+                this.taskList = taskList;
             });
     }
 
     loaded(): boolean {
-        const dataLoaded = this.studentsLoaded && this.statusListLoaded && this.taskListLoaded;
+        const dataLoaded = !!this.students && !!this.statusList && !!this.taskList;
         if (dataLoaded && !this.dataProcessed) {
             this.displayStudents = this.students.map((student: Student) => ({
                 id: student.id,
@@ -98,27 +83,20 @@ export class StudentsPageComponent implements OnInit {
             }));
             this.dataProcessed = true;
         }
-        return dataLoaded;
+        return dataLoaded || !!this.error;
     }
 
     deleteStudent(id: number): void {
-        this.studentsService.deleteStudent(id)
-            .pipe(catchError(error => {
-                this.reqError = error;
-                return of();
-            }))
-            .subscribe(() => {
-                if (!this.reqError) {
-                    this.setLoaded(false);
-                    this.ngOnInit();
-                }
-            });
+        this.studentsService.deleteStudent(id).subscribe(() => {
+            this.setNotLoaded();
+            this.ngOnInit();
+        });
     }
 
-    setLoaded(loaded: boolean): void {
-        this.studentsLoaded = loaded;
-        this.statusListLoaded = loaded;
-        this.taskListLoaded = loaded;
-        this.dataProcessed = loaded;
+    setNotLoaded(): void {
+        this.students = undefined;
+        this.statusList = undefined;
+        this.taskList = undefined;
+        this.dataProcessed = false;
     }
 }

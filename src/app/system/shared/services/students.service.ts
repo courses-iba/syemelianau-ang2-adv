@@ -11,35 +11,33 @@ import { ListElement } from '../models/list-element.model';
     providedIn: 'root'
 })
 export class StudentsService {
-    private apiUri = environment.apiUrl;
+    private apiUri = environment.apiUrl + '/student';
 
     constructor(private http: HttpClient) {}
 
     getStudents(): Observable<Array<Student>> {
-        return this.http.get<Array<Student>>(`${this.apiUri}/student`);
-    }
-
-    getStudent(id: number): Observable<Student> {
-        return this.http.get<Student>(`${this.apiUri}/student/${id}`);
+        return this.http.get<Array<Student>>(`${this.apiUri}`);
     }
 
     createStudent(student: Student): Observable<Student> {
-        return this.http.post<Student>(`${this.apiUri}/student`, student);
+        return this.http.post<Student>(`${this.apiUri}`, student);
     }
 
     updateStudent(id: number, studentData: Student): Observable<Student> {
-        return this.http.put<Student>(`${this.apiUri}/student/${id}`, studentData);
+        return this.http.put<Student>(`${this.apiUri}/${id}`, studentData);
     }
 
     deleteStudent(id: number): Observable<Student> {
-        return this.http.delete<Student>(`${this.apiUri}/student/${id}`);
+        return this.http.delete<Student>(`${this.apiUri}/${id}`);
     }
 
-    getStatusList(): Observable<Array<ListElement>> {
-        return this.http.get<Array<ListElement>>(`${this.apiUri}/statuslist`);
+    getStudent(id: number): Observable<Student> {
+        return this.http.get<Student>(`${this.apiUri}/${id}`);
     }
 
-    getTaskList(): Observable<Array<ListElement>> {
-        return this.http.get<Array<ListElement>>(`${this.apiUri}/tasklist`);
+    getStudentsByStatusIds(list: Array<ListElement>): Observable<Array<Student>> {
+        return this.http.get<Array<Student>>(
+            `${this.apiUri}?statusId=${list.map(({ id }) => id).join('&statusId=')}`
+        );
     }
 }

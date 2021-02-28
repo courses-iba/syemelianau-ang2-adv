@@ -8,6 +8,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { HeaderComponent } from './shared/components/header/header.component';
 import { StudentsPageComponent } from './students-page/students-page.component';
 import { StudentPageComponent } from './student-page/student-page.component';
+import { ActivityPageComponent } from './activity-page/activity-page.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 
@@ -18,6 +19,7 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
         HeaderComponent,
         StudentsPageComponent,
         StudentPageComponent,
+        ActivityPageComponent,
         DropdownDirective,
         FilterPipe
     ],

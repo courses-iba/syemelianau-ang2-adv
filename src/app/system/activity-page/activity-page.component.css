@@ -1,0 +1,13 @@
+.progress {
+    width: 50%;
+    margin-right: 30px;
+    height: auto;
+}
+
+.flex-row {
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    color: black;
+}
