@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { Student } from '../shared/models/sudent.model';
+import { Student } from '../shared/models/student.model';
 import { StudentsService } from '../shared/services/students.service';
 import { ListElement } from '../shared/models/list-element.model';
 import { ListService } from '../shared/services/list.service';

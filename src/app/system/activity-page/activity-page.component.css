@@ -1,11 +1,12 @@
 .progress {
     width: 50%;
     margin-right: 30px;
-    height: auto;
+    height: 2em;
 }
 
 .flex-row {
     margin-bottom: 15px;
+    display: flex;
 }
 
 .progress-bar {

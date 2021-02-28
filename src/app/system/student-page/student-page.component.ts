@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { StudentsService } from '../shared/services/students.service';
 import { ListService } from '../shared/services/list.service';
-import { Student } from '../shared/models/sudent.model';
+import { Student } from '../shared/models/student.model';
 import { ListElement } from '../shared/models/list-element.model';
 
 @Component({

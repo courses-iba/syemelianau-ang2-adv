@@ -6,7 +6,7 @@ import { StudentsService } from '../shared/services/students.service';
 import { ListService } from '../shared/services/list.service';
 import { ListElement } from '../shared/models/list-element.model';
 import { StudentView } from '../shared/models/student-view.model';
-import { Student } from '../shared/models/sudent.model';
+import { Student } from '../shared/models/student.model';
 import { Filter } from '../shared/models/filter.model';
 
 @Component({

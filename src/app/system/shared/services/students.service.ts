@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 
-import { Student } from '../models/sudent.model';
+import { Student } from '../models/student.model';
 import { ListElement } from '../models/list-element.model';
 
 @Injectable({
