@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { SystemModule } from './system/system.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 registerLocaleData(locale);
 
@@ -20,7 +21,8 @@ registerLocaleData(locale);
         HttpClientModule,
         AppRoutingModule,
         AuthModule,
-        SystemModule
+        SystemModule,
+        NotFoundModule
     ],
     bootstrap: [AppComponent],
     providers: [{ provide: LOCALE_ID, useValue: 'ru-BY' }]

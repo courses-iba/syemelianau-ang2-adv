@@ -12,8 +12,11 @@ const routes: Routes = [
         path: 'system',
         canActivate: [AuthGuardService],
         loadChildren: () => import('./system/system.module').then(m => m.SystemModule)
+    }, {
+        path: 'not-found',
+        loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)
     },
-    { path: '**', redirectTo: '/login', pathMatch: 'full' }
+    { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({
