@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SystemRoutingModule } from './system-routing.module';
@@ -31,7 +30,6 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     imports: [
         CommonModule,
         FormsModule,
-        BrowserAnimationsModule,
         NgxChartsModule,
         SystemRoutingModule
     ]
