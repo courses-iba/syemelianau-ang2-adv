@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.queryParamMap.subscribe(params =>
-            this.loginMessage = params.get('canLogin')
+            this.loginMessage = JSON.parse(params.get('canLogin'))
                 ? new Message(params.get('message'), 'success')
                 : new Message(params.get('message'), 'danger')
         );
