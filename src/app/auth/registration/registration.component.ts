@@ -8,7 +8,7 @@ import { AuthService } from '../../shared/services/auth.service';
     selector: 'app-registration',
     templateUrl: './registration.component.html'
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
     registrationForm: FormGroup;
 
     constructor(private authService: AuthService, private router: Router) {
@@ -20,19 +20,13 @@ export class RegistrationComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {
-        if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/system']).then();
-        }
-    }
-
     onSubmit(): void {
         this.authService.registration(
             this.registrationForm.controls.email.value,
             this.registrationForm.controls.password.value,
             this.registrationForm.controls.name.value,
             (message, ok) =>
-                this.router.navigate(['/login'], { queryParams: { message, canLogin: ok } }).then()
+                this.router.navigate(['/login'], { queryParams: { message, canLogin: ok } })
         );
     }
 }

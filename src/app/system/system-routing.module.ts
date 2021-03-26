@@ -7,17 +7,15 @@ import { StudentPageComponent } from './student-page/student-page.component';
 import { ActivityPageComponent } from './activity-page/activity-page.component';
 import { StatisticsPageComponent } from './statistics-page/statistics-page.component';
 
-const routes: Routes = [
-    {
-        path: 'system', component: SystemComponent, children: [
-            { path: '', redirectTo: 'students', pathMatch: 'full' },
-            { path: 'students', component: StudentsPageComponent },
-            { path: 'student', component: StudentPageComponent },
-            { path: 'activity', component: ActivityPageComponent },
-            { path: 'statistics', component: StatisticsPageComponent }
-        ]
-    }, { path: '**', redirectTo: '/login', pathMatch: 'full' }
-];
+const routes: Routes = [{
+    path: '', component: SystemComponent, children: [
+        { path: '', redirectTo: 'students', pathMatch: 'full' },
+        { path: 'students', component: StudentsPageComponent },
+        { path: 'student', component: StudentPageComponent },
+        { path: 'activity', component: ActivityPageComponent },
+        { path: 'statistics', component: StatisticsPageComponent }
+    ]
+}];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

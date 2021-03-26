@@ -21,9 +21,6 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/system']).then();
-        }
         this.route.queryParamMap.subscribe(params =>
             this.loginMessage = params.get('canLogin')
                 ? new Message(params.get('message'), 'success')
