@@ -7,11 +7,13 @@ import { StudentsService } from '../shared/services/students.service';
 import { ListService } from '../shared/services/list.service';
 import { Student } from '../shared/models/student.model';
 import { ListElement } from '../shared/models/list-element.model';
+import { studentAnimations } from '../../animations';
 
 @Component({
     selector: 'app-student-page',
     templateUrl: './student-page.component.html',
-    styleUrls: ['./student-page.component.css']
+    styleUrls: ['./student-page.component.css'],
+    animations: studentAnimations
 })
 export class StudentPageComponent implements OnInit {
     student?: Student;

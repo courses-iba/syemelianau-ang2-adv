@@ -7,8 +7,9 @@
                 <div class="card card-body">
                     <div *ngFor="let activity of activities" class="flex-row">
                         <div class="progress">
-                            <div class="progress-bar bg-{{activity.type}}"
+                            <div [@widthAnimation]
                                  role="progressbar"
+                                 class="progress-bar bg-{{activity.type}}"
                                  [style]="'width: ' + activity.percent + '%'"
                                  aria-valuenow="{{activity.task}}"
                                  aria-valuemin="{{activity.min}}"

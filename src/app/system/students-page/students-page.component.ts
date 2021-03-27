@@ -8,11 +8,13 @@ import { ListElement } from '../shared/models/list-element.model';
 import { StudentView } from '../shared/models/student-view.model';
 import { Student } from '../shared/models/student.model';
 import { Filter } from '../shared/models/filter.model';
+import { tableAnimations } from '../../animations';
 
 @Component({
     selector: 'app-students-page',
     templateUrl: './students-page.component.html',
-    styleUrls: ['./students-page.component.css']
+    styleUrls: ['./students-page.component.css'],
+    animations: tableAnimations
 })
 export class StudentsPageComponent implements OnInit {
     students?: Array<Student>;
@@ -21,7 +23,6 @@ export class StudentsPageComponent implements OnInit {
     displayStudents: Array<StudentView>;
     dataProcessed: boolean;
     filter: Filter;
-    deleteError: any;
     error: any;
 
     constructor(private studentsService: StudentsService, private listService: ListService) {
