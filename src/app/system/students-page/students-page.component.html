@@ -4,7 +4,7 @@
             <div *ngIf="loaded(); else loading">
                 <div *ngIf="error; else content" class="alert alert-danger">Извините, что-то пошло не так...</div>
                 <ng-template #content>
-                    <div class="card">
+                    <div [@pageAnimation] class="card">
                         <div class="card-header">
                             <div class="header-block">
                                 <h3 class="title">Студенты</h3>
@@ -38,7 +38,7 @@
                                     <th class="text-lg-center"></th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody [@filterAnimation]="(displayStudents | filter:filter.field:filter.value).length">
                                 <tr *ngFor="let student of displayStudents | filter:filter.field:filter.value">
                                     <td>{{student.id}}</td>
                                     <td>{{student.name}}</td>

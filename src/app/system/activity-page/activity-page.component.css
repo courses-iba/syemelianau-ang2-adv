@@ -2,6 +2,7 @@
     width: 50%;
     margin-right: 30px;
     height: 2em;
+    border-radius: 20px;
 }
 
 .flex-row {
@@ -11,4 +12,5 @@
 
 .progress-bar {
     color: black;
+    border-radius: 20px;
 }

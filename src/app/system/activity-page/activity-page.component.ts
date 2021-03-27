@@ -7,11 +7,13 @@ import { StudentsService } from '../shared/services/students.service';
 import { ListElement } from '../shared/models/list-element.model';
 import { ListService } from '../shared/services/list.service';
 import { Activity } from '../shared/models/activity.model';
+import { activityAnimations } from '../../animations';
 
 @Component({
     selector: 'app-current-activity-page',
     templateUrl: './activity-page.component.html',
-    styleUrls: ['./activity-page.component.css']
+    styleUrls: ['./activity-page.component.css'],
+    animations: activityAnimations
 })
 export class ActivityPageComponent implements OnInit {
     activities: Array<Activity>;

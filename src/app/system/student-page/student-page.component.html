@@ -4,7 +4,7 @@
         <div class="modal-body">
             <div *ngIf="error; else content" class="alert alert-danger">Извините, что-то пошло не так...</div>
             <ng-template #content>
-                <form class="card" #studentForm="ngForm" (ngSubmit)="onSubmit()">
+                <form [@fadeAnimation] class="card" #studentForm="ngForm" (ngSubmit)="onSubmit()">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name" class="font-weight-bold">Имя:</label>
