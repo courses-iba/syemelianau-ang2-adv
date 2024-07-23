@@ -23,7 +23,7 @@
     "@angular/platform-browser": "^11.2.3",
     "@angular/platform-browser-dynamic": "^11.2.3",
     "@angular/router": "^11.2.3",
-    "@swimlane/ngx-charts": "^17.0.1",
+    "@swimlane/ngx-charts": "^20.5.0",
     "bootstrap": "^4.6.0",
     "concurrently": "^6.0.0",
     "jquery": "^3.5.1",
